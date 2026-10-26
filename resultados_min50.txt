@@ -1,0 +1,4 @@
+Usuarios avaliados: 300 (sem recomendacao: 0)
+Precision@10: 0.0130
+Recall@10:    0.0112
+F1@10:        0.0120
