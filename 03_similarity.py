@@ -38,7 +38,7 @@ def main():
 
     valid = common >= cfg.MIN_COMMON
     np.fill_diagonal(valid, False)
-    score = np.where(valid, np.abs(corr), -1.0)
+    score = np.where(valid, corr, -1.0)
     k = min(cfg.TOP_NEIGHBORS, len(movie_ids) - 1)
     top = np.argpartition(-score, k, axis=1)[:, :k]      # k vizinhos de maior |c| por filme
 

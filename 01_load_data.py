@@ -4,8 +4,15 @@ import numpy as np
 import pandas as pd
 import config as cfg
 
-RATINGS_PATH = os.path.join(cfg.DATA_DIR, "raw", "rating.csv")
-MOVIES_PATH = os.path.join(cfg.DATA_DIR, "raw", "movie.csv")
+def resolve_path(base_dir, *names):
+    for name in names:
+        p = os.path.join(base_dir, "raw", name)
+        if os.path.exists(p):
+            return p
+    raise FileNotFoundError(f"Nenhum ficheiro encontrado em data/raw/: {names}")
+
+RATINGS_PATH = resolve_path(cfg.DATA_DIR, "ratings.csv", "rating.csv")
+MOVIES_PATH = resolve_path(cfg.DATA_DIR, "movies.csv", "movie.csv")
 
 
 def main():

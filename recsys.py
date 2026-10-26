@@ -6,14 +6,15 @@ onde N_k(i) = os k vizinhos de i (maior |c|) que o usuário u avaliou.
 
 PREDICT = """
 MATCH (i:Movie {movieId: $mid})-[s:SIMILAR_TO]->(j:Movie)<-[r:RATED]-(u:User {userId: $uid})
-WITH s, r ORDER BY abs(s.corr) DESC LIMIT $k
+WHERE s.corr > 0
+WITH s, r ORDER BY s.corr DESC LIMIT $k
 RETURN sum(s.corr * r.rating) AS num, sum(abs(s.corr)) AS den, count(*) AS n
 """
 
 RECOMMEND = """
 MATCH (u:User {userId: $uid})-[r:RATED]->(j:Movie)<-[s:SIMILAR_TO]-(i:Movie)
-WHERE NOT (u)-[:RATED]->(i)
-WITH i, s, r ORDER BY abs(s.corr) DESC
+WHERE s.corr > 0 AND NOT (u)-[:RATED]->(i)
+WITH i, s, r ORDER BY s.corr DESC
 WITH i, collect({c: s.corr, r: r.rating})[0..$k] AS nb
 WHERE size(nb) >= $min_nb
 WITH i, nb,
