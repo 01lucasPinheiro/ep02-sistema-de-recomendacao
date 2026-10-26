@@ -4,8 +4,8 @@ Filtragem colaborativa item-item sobre o MovieLens 20M: correlação de Pearson 
 
 ## Nomes
 
-Lucas Pinheiro da Costa
-Matheus Dutra
+Lucas Pinheiro da Costa  \
+Matheus Dutra  \
 Pedro H. Lira
 
 ## Estrutura do repositório
